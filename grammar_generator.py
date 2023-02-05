@@ -127,13 +127,15 @@ while len(set(lines)) < 200:
 
         if next_letter == ERule.LETTER:
             break
+        if len(letters) >= MAX:
+            letters = []
 
-    line = list(map(lambda char: char.upper(), letters))
+            break
 
-    if len(line) >= MAX:
-        continue
+    if len(letters) > 0:
+        line = list(map(lambda char: char.upper(), letters))
 
-    lines.append(''.join(line))
+        lines.append(''.join(line))
 
 with open('proper_reber.txt', 'w') as f:
     for line in set(lines):
