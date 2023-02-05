@@ -137,5 +137,4 @@ while len(set(lines)) < 200:
 
 with open('proper_reber.txt', 'w') as f:
     for line in set(lines):
-        f.write(line + '\n')
-
+        f.write(f'{line}\n')
