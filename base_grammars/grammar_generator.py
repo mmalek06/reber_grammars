@@ -110,33 +110,41 @@ class ERule(Rule):
 
 
 rules = [BRule(), TRule(), PRule(), VRule(), XRule(), SRule(), ERule()]
-lines = []
-counter = 0
-MAX = 500
 
-while len(set(lines)) < 200:
-    letters = []
 
-    while True:
-        counter += 1
-        applicable_rules = list(filter(lambda rule: rule.applies(letters), rules))
-        chosen_rule = random.choice(applicable_rules)
-        next_letter = chosen_rule.LETTER
+def generate(rules: list[Rule]) -> set[str]:
+    lines = []
+    counter = 0
+    MAX = 500
 
-        letters.append(next_letter)
+    while len(set(lines)) < 2000:
+        letters = []
 
-        if next_letter == ERule.LETTER:
-            break
-        if len(letters) >= MAX:
-            letters = []
+        while True:
+            counter += 1
+            applicable_rules = list(filter(lambda rule: rule.applies(letters), rules))
+            chosen_rule = random.choice(applicable_rules)
+            next_letter = chosen_rule.LETTER
 
-            break
+            letters.append(next_letter)
 
-    if len(letters) > 0:
-        line = list(map(lambda char: char.upper(), letters))
+            if next_letter == ERule.LETTER:
+                break
+            if len(letters) >= MAX:
+                letters = []
 
-        lines.append(''.join(line))
+                break
+
+        if len(letters) > 0:
+            line = list(map(lambda char: char.upper(), letters))
+
+            lines.append(''.join(line))
+
+    return set(lines)
+
+
+lines = generate(rules)
 
 with open('proper_reber.txt', 'w') as f:
-    for line in set(lines):
+    for line in lines:
         f.write(f'{line}\n')
