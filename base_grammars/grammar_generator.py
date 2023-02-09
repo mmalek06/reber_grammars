@@ -143,8 +143,9 @@ def generate(rules: list[Rule]) -> set[str]:
     return set(lines)
 
 
-lines = generate(rules)
+if __name__ == '__main__':
+    lines = generate(rules)
 
-with open('proper_reber.txt', 'w') as f:
-    for line in lines:
-        f.write(f'{line}\n')
+    with open('proper_reber.txt', 'w') as f:
+        for line in lines:
+            f.write(f'{line}\n')

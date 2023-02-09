@@ -2,14 +2,14 @@ import random
 import string
 
 
-def degenerate():
-    with open('proper_reber.txt', 'r') as f:
+def degenerate(proper_reber_path):
+    with open(proper_reber_path, 'r') as f:
         lines = [line.rstrip() for line in f]
 
     initial_length = len(lines)
     five_percent_count = int(.05 * len(lines))
 
-    with open('actual_words.txt', 'r') as f:
+    with open('../actual_words.txt', 'r') as f:
         random_words = list(set([line.rstrip() for line in f]))
 
     def get_diffed_list(diff: list[str]) -> list[str]:
@@ -179,9 +179,9 @@ def degenerate():
     return new_lines
 
 
-new_lines = degenerate()
+if __name__ == '__main__':
+    new_lines = degenerate('proper_reber.txt')
 
-
-with open('improper_reber.txt', 'w') as f:
-    for line in set(new_lines):
-        f.write(f'{line}\n')
+    with open('improper_reber.txt', 'w') as f:
+        for line in set(new_lines):
+            f.write(f'{line}\n')

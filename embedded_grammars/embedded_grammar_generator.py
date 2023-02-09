@@ -11,6 +11,7 @@ for idx in range(len(lines)):
     line = f'{beginning}{lines[idx]}{ending}'
     lines[idx] = line
 
-with open('proper_embedded_reber.txt', 'w') as f:
-    for line in lines:
-        f.write(f'{line}\n')
+if __name__ == "__main__":
+    with open('proper_embedded_reber.txt', 'w') as f:
+        for line in lines:
+            f.write(f'{line}\n')
